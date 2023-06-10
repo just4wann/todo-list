@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+$headerShadow: 0 5px 10px 0 rgba($color: black, $alpha: .08);
+$footerShadow: 5px 0 10px 0 rgba($color: black, $alpha: .08);
+$primaryColor: rgb(8, 174, 8);
+$rejectColor: rgb(222, 6, 6);
+$flex: flex;
+$bold: 700;
+$semiBold: 600;
+$regular: 400;
+$light: 300;
+
+@mixin glassEffect {
+    background: rgba( 255, 255, 255, 0.2 );
+    backdrop-filter: blur( 20px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+};
+
+@mixin centeringFlex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+};
+@mixin columnFlex {
+    display: flex;
+    flex-direction: column;
+};
+
+@mixin button {
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+};
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-weight: $regular;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $primaryColor;
+    border-radius: 10px
+}
+
+header {
+    @include glassEffect();
+    position: fixed;
+    width: 100%;
+    box-shadow: $headerShadow;
+    padding: 15px 100px;
+
+    h2 {
+        font-weight: $semiBold;
+        span.green {
+            color: $primaryColor;
+            letter-spacing: 2px;
+            font-weight: $bold
+        }
+    }
+}
+
+main {
+    @include columnFlex();
+    padding: 90px 100px;
+    gap: 15px;
+
+    .list-task {
+        @include columnFlex();
+        gap: 10px;
+
+        p {
+            text-align: center;
+            font-weight: $semiBold;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .item-task {
+            @include centeringFlex();
+            justify-content: space-between;
+            border: 2px solid rgba($color: black, $alpha: .1);
+            border-radius: 10px;
+            padding: 15px 25px;
+            gap: 20px;
+            width: 100%;
+            transition: border .2s;
+
+            &:hover {
+                border-color: rgba($color: $primaryColor, $alpha: .5);
+            }
+
+            input {
+                cursor: pointer;
+                width: 1.1rem;
+            }
+
+            .task-body {
+                gap: 20px;
+                display: $flex;
+
+                .task-text {
+                    @include columnFlex();
+                    gap: 1px;
+
+                    .title-task {
+                    font-weight: $semiBold;
+                    font-size: 1.02rem;
+                    color: $primaryColor;
+                    }
+
+                    .description-task {
+                        font-weight: $light;
+                    }
+                }
+            }
+
+            button.delete {
+                @include button();
+                background-color: $rejectColor;
+                color: white;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgb(201, 9, 9);
+                }
+            }
+        }
+
+        .task-done {
+            background-color: rgb(219, 219, 219);
+
+            &:hover {
+                border-color: rgba($color: $rejectColor, $alpha: .5);
+            }
+
+            .task-body {
+
+                .task-text {
+
+                    .title-task {
+                        text-decoration: line-through;
+                        color: $rejectColor;
+                    }
+
+                    .description-task {
+                        color: rgb(156, 156, 156);
+                    }
+                }
+            }
+        }
+    }
+
+    .action {
+        @include centeringFlex();
+        @include columnFlex();
+        gap: 10px;
+
+        .failed-add {
+            color: $rejectColor;
+            font-weight: $semiBold;
+        }
+
+        a.add-button {
+            @include button();
+            text-decoration: none;
+            background-color: $primaryColor;
+            color: white;
+
+            &:hover {
+                background-color: rgb(9, 158, 9)
+            }
+        }
+
+        .add-card {
+            @include centeringFlex();
+            @include columnFlex();
+
+            .card {
+                @include columnFlex();
+                gap: 10px;
+
+                input[type="text"], textarea {
+                    width: 500px;
+                    padding: 10px;
+                    border: 2px solid black;
+                    border-radius: 10px;
+                    font-size: 1rem;
+
+                    &:focus {
+                        border-color: $primaryColor;
+                        outline: $primaryColor;
+                    }
+                }
+                textarea {
+                    resize: none;
+                }
+            }
+
+            .button-wrapper {
+                display: $flex;
+                margin-top: 10px;
+                gap: 20px;
+
+                .btn {
+                    @include button();
+                    color: white;
+                    cursor: pointer;
+                    font-size: 0.95rem;
+                }
+
+                .btn-primary {
+                    background-color: $primaryColor;
+
+                    &:hover {
+                        background-color: rgb(9, 158, 9);
+                    }
+                }
+
+                .btn-outline-secondary {
+                    background-color: $rejectColor;
+
+                    &:hover {
+                        background-color: rgb(201, 9, 9);
+                    }
+                }
+            }
+        }
+    }
+}
+
+footer {
+    @include glassEffect();
+    position: fixed;
+    bottom: 0;
+    padding: 15px;
+    width: 100%;
+    box-shadow: $footerShadow;
+    font-weight: $bold;
+
+    p {
+        text-align: center;
+        
+        span.green {
+            color: $primaryColor;
+            font-weight: $semiBold;
+        }
+    }
+}
